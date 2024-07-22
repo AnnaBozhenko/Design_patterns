@@ -1,0 +1,59 @@
+public class Beverage {
+    string description;
+    double service_cost;
+    double appliences_use_cost;
+    double soy_price;
+    double milk_price;
+    double coffee_beans_price;
+    double mocha_price;
+    boolean is_whipped;
+
+
+    class Beverage(..., double service_cost, double appliences_use_cost, double coffee_beans_price, ... ) {
+        // ...
+        this.service_cost = service_price;
+        this.appliences_use_cost = appliences_use_cost;
+        this.coffee_beans_price = coffee_beans_price;
+        // ...
+    }
+
+    public double cost() {
+        double price = this.service_cost + this.appliences_use_cost + this.coffee_beans_price;
+        return price;
+    }
+}
+
+
+class Espresso extends Beverage {
+    // ...
+    
+
+    public Espresso(...) {
+        super();
+    }
+
+    public double cost() {
+        double price = super().cost();
+        if (has_milk() == true) {
+            price += milk_price;
+        } // ...
+        return price;
+
+    }
+
+    public boolen has_milk() {
+        return false;
+    }
+
+    public boolen has_soy() {
+        return false;
+    }
+
+    public boolen has_mocha() {
+        return false;
+    }
+    
+    public boolen is_whipped() {
+        return false;
+    }
+} 
