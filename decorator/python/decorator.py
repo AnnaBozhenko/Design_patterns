@@ -77,7 +77,7 @@ class CondimentDecorator(Beverage):
 
 class SteamedMilk(CondimentDecorator):
     description = "Steamed milk"
-
+ 
     def __init__(self, base_beverage):
         super().__init__(base_beverage)
 
@@ -90,16 +90,26 @@ class SteamedMilk(CondimentDecorator):
 
 class Soy(CondimentDecorator):
     description = "Soy"
+    cup_size_specific_cost = {"tall": 0.10,
+                              "grande": 0.15,
+                              "vendi": 0.20}
+    
+    def set_size(self, size):
+        self._size = size
 
-    def __init__(self, base_beverage):
+    def get_size(self):
+        return self._size
+    
+    def __init__(self, base_beverage, size):
         super().__init__(base_beverage)
+        self.set_size(size)
 
     def get_description(self):
-        return f"{self.base_beverage.get_description()}, {Soy.description}"
+        return f"{self.base_beverage.get_description()}, {Soy.description} ({self.get_size()})"
     
     def cost(self):
-        return self.base_beverage.cost() + 0.15
-    
+        return self.base_beverage.cost() + Soy.cup_size_specific_cost[self.get_size()]
+        
 
 class Whip(CondimentDecorator):
     description = "Whip"
