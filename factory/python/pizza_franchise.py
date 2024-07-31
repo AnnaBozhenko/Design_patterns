@@ -1,7 +1,7 @@
 # Implement case when there are many stores of a franchise each featuring methods of cooking the same pizzas
 
 from abc import ABC, abstractmethod 
-from typing import List
+from typing import List, TypeVar, Type
 
 RED_PEPPERS  = "Red Peppers"
 ONIONS       = "Onions"
@@ -149,32 +149,33 @@ class NYCIngredientsFactory(IngredientsFactory):
     def sauce(cls) -> Sauce: 
         return Sauce("Marinara")
     
+TPizza = TypeVar("TPizza", bound="Pizza")
 
 class Pizza(ABC):
     def __init__(self, ingredients_factory: IngredientsFactory) -> None:
         self.ingredients_factory = ingredients_factory
 
-    def cook(self) -> None:
+    def cook(self: TPizza) -> None:
         self.prepare()
         self.bake()
         self.cut()
         self.box()
 
     @abstractmethod
-    def prepare(self) -> None: ...
+    def prepare(self: TPizza) -> None: ...
 
-    def bake(self) -> None: 
+    def bake(self: TPizza) -> None: 
         print("Baking for 20 minutes at 350...")
 
-    def cut(self) -> None:
+    def cut(self: TPizza) -> None:
         print("Cutting on diagonal sectors...")
 
-    def box(self) -> None:
+    def box(self: TPizza) -> None:
         print("Packing pizza into a box...")
 
     @abstractmethod
     @classmethod
-    def get_name(cls) -> str: ...
+    def get_name(cls: Type[TPizza]) -> str: ...
     
 
 class CheesePizza(Pizza):
@@ -208,7 +209,7 @@ class CheesePizza(Pizza):
     
 
     @classmethod
-    def get_name(cls) -> str:
+    def get_name(cls):
         return "Cheese Pizza"
 
 
@@ -315,13 +316,13 @@ class PizzaStore(ABC):
 
 class ChicagoPizzaStore(PizzaStore):
     @classmethod
-    def order_pizza(cls, pizza_type: str) -> CheesePizza | VeggiePizza | PepperoniPizza | ClamsPizza:
+    def order_pizza(cls, pizza_type):
         print("Greet client with a cup of coffee he wants")
         pizza = cls.make_pizza(pizza_type)
         return pizza
     
     @classmethod
-    def make_pizza(cls, pizza_type: str) -> CheesePizza | VeggiePizza | PepperoniPizza | ClamsPizza:
+    def make_pizza(cls, pizza_type):
         if pizza_type == "cheese":
             ingredients = ChicagoIngredientsFactory()
             pizza = CheesePizza(ingredients, veggies=[OREGANO])
@@ -343,13 +344,13 @@ class ChicagoPizzaStore(PizzaStore):
 
 class NYCPizzaStore(PizzaStore):
     @classmethod
-    def order_pizza(cls, pizza_type:str) -> CheesePizza | VeggiePizza | PepperoniPizza | ClamsPizza:
+    def order_pizza(cls, pizza_type):
         print("Greet client with a cup of freshly squeezed fruit juice he wants")
         pizza = cls.make_pizza(pizza_type)    
         return pizza
     
     @classmethod
-    def make_pizza(cls, pizza_type: str) -> CheesePizza | VeggiePizza | PepperoniPizza | ClamsPizza:
+    def make_pizza(cls, pizza_type):
         if pizza_type == "cheese":
             ingredients = NYCIngredientsFactory()
             pizza = CheesePizza(ingredients, veggies=[GARLIC])
