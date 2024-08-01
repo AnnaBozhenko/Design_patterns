@@ -1,0 +1,41 @@
+class ChocolateBoiler {
+    private static ChocolateBoiler boiler;
+    private static bool empty;
+    private static bool boiled;
+
+    public Chocolate_boiler get_ChocolateBoilerInstance() {
+        if (boiler is null) {
+            boiler = new ChocolateBoiler();
+            empty = True;
+            boiled = False;
+        }
+        return boiler;
+    } 
+
+    public void fill_boiler() {
+        // make sure boiler is instantiated
+        get_ChocolateBoilerInstance();
+
+        if (empty) {
+            empty = False;
+        }
+    }
+
+    public void drain_boiler() {
+        // make sure boiler is instantiated
+        get_ChocolateBoilerInstance
+
+        if (!empty) {
+            empty = True;
+        }
+    }
+
+    public void boil() {
+        // make sure boiler is instantiated
+        get_ChocolateBoilerInstance
+
+        if (!boiled && ~empty) {
+            boiled = True;
+        }        
+    }
+}
