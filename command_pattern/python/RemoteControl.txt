@@ -1,0 +1,23 @@
+class Dictionary {
+    // instantiating
+    // Dictionary controls = new Dictionary({["lights_on", LightOnCommand],
+    //                                       ["garage_door_open", GarageDoorOpenCommand]});
+
+    // adding to instance
+    // controls.add(["hot_pipes_jet_on", HotPipesJetOn]);
+
+    // remove from instance
+    // controls.remove(["hot_pipes_jet_on"])
+
+    // get size
+    // controls.size()
+
+    // free instance
+    // controls.free()
+
+    // implementation
+}
+
+class RemoteControl {
+    Dictionary controls;
+}

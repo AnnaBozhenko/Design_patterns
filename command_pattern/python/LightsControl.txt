@@ -1,0 +1,62 @@
+// Receiver
+class Light {
+    public Light() {}
+
+    public void on() {
+        //
+    }
+
+    public void off() {
+        //
+    }
+}
+
+
+interface Command {
+    public void execute();
+} 
+
+
+// Command
+class LightOnCommand implements {
+    Light light;
+
+    public LightOnCommand(Light light) {
+        this.light = light;
+    }
+
+    public void execute() {
+        light.on();
+    }
+}
+
+
+// Control
+class RemoteControl {
+    Command slot;
+
+    public RemoteControl() {}
+
+    public setCommand(Command command) {
+        this.command = command;
+    }
+
+    public void pressButton() {
+        slot.execute();
+    }
+}
+
+
+public class TestLightsOn {
+    public static void main(String[] args) {
+        RemoteControl remote = new RemoteControl();
+        Light light = new Light();
+
+        LightOnCommand light_on = LightOnCommand(light);
+
+        remote.setCommand(Light_on);
+        // test turning on light
+        remote.pressButton();
+    }
+}
+

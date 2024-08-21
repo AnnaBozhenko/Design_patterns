@@ -1,0 +1,47 @@
+class GarageDoor {
+    public GarageDoor() {}
+
+    public void up() {
+        //
+    }
+
+    public void down() {
+        //
+    }
+
+    public void stop() {
+        //
+    }
+
+    public void lightOn() {
+        //
+    }
+
+    public void lightOff() {
+        //
+    }
+}
+
+
+class GarageDoorOpenCommand implements Command {
+    GarageDoor garage_door;
+
+    public GarageDoorOpenCommand(GarageDoor garage_door) {
+        this.garage_door = garage_door;
+    }
+
+    public exeecute() {
+        garage_door.up();
+    }
+}
+
+class TestGarageDoorOpen {
+    public static main(String[] args) {
+        RemoteControl remote = new RemoteControl();
+        GarageDoor garage_door = new GarageDoor();
+        GarageDoorOpenCommand garage_door_open_command = new GarageDoorOpenCommand(garage_door);
+
+        remote.setCommand(GarageDoorOpenCommand);
+        remote.pressButton();
+    }
+}
